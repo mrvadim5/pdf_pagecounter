@@ -51,7 +51,7 @@ def export_to_excel(pdf_data, desktop_path):
     print(f"Data exported to {excel_file_path}")
 
 # Provide the path to your folder containing the PDF files. This line will need to be updated per use.
-folder_path = "C://fakefolder/fakefiles"
+folder_path = r"C://fakefolder/fakefiles"
 
 # Get the desktop path dynamically
 desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
