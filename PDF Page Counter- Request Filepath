@@ -52,7 +52,7 @@ def export_to_excel(pdf_data, desktop_path):
     workbook.save(excel_file_path)
     print(f"Data exported to {excel_file_path}")
 
-# desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+# desktop_path input
 desktop_path = "c://users/USER/onedrive/desktop"
 
 # Get the PDF page count data concurrently
