@@ -4,7 +4,7 @@
 #import fitz
 
 def count_pdf_pages(pdf_path):
-    """Return the number of pages in a PDF file using PyMuPDF."""
+    """Return the number of pages in a PDF file using OpenPyXL."""
     try:
         pdf_document = fitz.open(pdf_path)
         return pdf_document.page_count
