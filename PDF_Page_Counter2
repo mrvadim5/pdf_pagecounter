@@ -1,6 +1,7 @@
 import os
 import concurrent.futures
 import openpyxl
+import pymupdf
 import fitz
 
 def count_pdf_pages(pdf_path):
