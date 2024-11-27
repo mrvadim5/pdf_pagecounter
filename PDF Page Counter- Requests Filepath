@@ -1,0 +1,64 @@
+import os
+import concurrent.futures
+import openpyxl
+import fitz
+
+folder_path = input("Please enter the file path to be scanned ")
+
+def count_pdf_pages(pdf_path):
+    """Return the number of pages in a PDF file using PyMuPDF."""
+    try:
+        pdf_document = fitz.open(pdf_path)
+        return pdf_document.page_count
+    except Exception as e:
+        return f"Error: {e}"
+
+def check_folder_pdfs_concurrently(folder_path):
+    """Check all PDFs in a folder and return their page count using concurrency."""
+    pdf_data = []
+    
+    # Get all PDF file paths in the folder
+    pdf_files = [os.path.join(folder_path, filename) 
+                 for filename in os.listdir(folder_path) if filename.endswith(".pdf")]
+
+    # Use ThreadPoolExecutor for concurrent execution
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        # Map the function to all PDF files concurrently
+        results = list(executor.map(count_pdf_pages, pdf_files))
+
+    # Collect results into pdf_data
+    pdf_data = [(os.path.basename(pdf_files[i]), results[i]) for i in range(len(pdf_files))]
+    
+    return pdf_data
+
+def export_to_excel(pdf_data, desktop_path):
+    """Export the PDF data (filename and page count) to an Excel file on the desktop."""
+    # Create the Excel file path on the desktop
+    excel_file_path = os.path.join(desktop_path, 'pdf_page_counts.xlsx')
+
+    # Create a new workbook and sheet
+    workbook = openpyxl.Workbook()
+    sheet = workbook.active
+    sheet.title = "PDF Page Counts"
+
+    # Writing header
+    sheet.append(["PDF File", "Page Count"])
+
+    # Writing the PDF data
+    for pdf_file, page_count in pdf_data:
+        sheet.append([pdf_file, page_count])
+
+    # Save the workbook
+    workbook.save(excel_file_path)
+    print(f"Data exported to {excel_file_path}")
+
+# desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+desktop_path = "c://users/USER/onedrive/desktop"
+
+# Get the PDF page count data concurrently
+pdf_data = check_folder_pdfs_concurrently(folder_path)
+
+# Export the data to an Excel file on the desktop
+export_to_excel(pdf_data, desktop_path)
+
+print ("Task complete")
