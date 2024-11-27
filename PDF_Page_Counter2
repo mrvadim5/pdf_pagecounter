@@ -1,7 +1,7 @@
-#import os
-#import concurrent.futures
-#import openpyxl
-#import fitz
+import os
+import concurrent.futures
+import openpyxl
+import fitz
 
 def count_pdf_pages(pdf_path):
     """Return the number of pages in a PDF file using PyMuPDF."""
@@ -51,10 +51,10 @@ def export_to_excel(pdf_data, desktop_path):
     print(f"Data exported to {excel_file_path}")
 
 # Provide the path to your folder containing the PDF files. This line will need to be updated per use.
-folder_path = r"C://fakefolder/fakefiles"
+folder_path = r"C:/Users/USER/FILEPATH"
 
-# Get the desktop path dynamically
-desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
+# Add the desktop path dor destination folder
+desktop_path = "c://users/USER/FILEPATH"
 
 # Get the PDF page count data concurrently
 pdf_data = check_folder_pdfs_concurrently(folder_path)
