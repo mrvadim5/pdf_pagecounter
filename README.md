@@ -16,4 +16,4 @@ Notes: Possible improvements to the code- ability to create sequential excel she
 
 PDF_Page_Counter2 appears to work with most IDEs. PDF_Page_Counter functions best with Jupyter. In 2, both the folder to be searched for page count and destination folder for export must be set manually. 
 
-PDF Countrt- Requests Filepath replaces editing the code with the filepath with a user input. The file path for the export will still need to be entered.
+PDF_Counter_Request_Filepath replaces editing the code with the filepath with a user input. The file path for the export will still need to be entered.
